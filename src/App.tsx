@@ -4,6 +4,7 @@ import AddItemForm from './components/AddItemForm';
 import EditItemForm from './components/EditItemForm';
 import FilterCategory from './components/FilterCategory';
 import { Item } from "@/models/item";
+import ModalBox from "./components/ModalBox";
 
 function App() {
     const initialInventory: Item[] = [
@@ -80,17 +81,17 @@ function App() {
 
     return (
         <div className="flex flex-col gap-4 justify-center items-center">
-            <div className='text-3xl mt-8'>🏭 Your Inventory ✍</div>
+            <div className='text-3xl mt-16'>🏭 Your Inventory ✍</div>
 
-            <div className="controls">
+            <div className="controls mt-12">
                 <FilterCategory
                     categories={categories}
                     selectedCategory={filterCategory}
                     onCategoryChange={handleFilterCategoryChange}
                 />
-                <button onClick={handleShowAddItemForm}>Add Item</button>
             </div>
 
+        <div className='flex flex-col gap-4 mt-4 items-start'>
             <InventoryTable
                 inventory={sortedInventory}
                 onDelete={handleDeleteItem}
@@ -98,20 +99,27 @@ function App() {
                 sortByQuantity={handleSortByQuantity}
                 currentSort={sortBy}
             />
+            <button className='align-self-start justify-self-start' onClick={handleShowAddItemForm}>Add Item</button>
+        </div>
 
             {isAddItemFormVisible && (
                 // Pass categories excluding "All"
-                <AddItemForm onAddItem={handleAddItem} onCancel={handleCancelAddItemForm} categories={categories.slice(1)} /> 
+                <ModalBox handleCancel={handleCancelAddItemForm}>
+                  <AddItemForm onAddItem={handleAddItem} onCancel={handleCancelAddItemForm} categories={categories.slice(1)} /> 
+                </ModalBox>
             )}
 
+
             {editItemId !== null && (
-                <EditItemForm
-                    item={inventory.find(item => item.id === editItemId)}
-                    onUpdateItem={handleEditItem}
-                    onCancel={handleCancelEdit}
-                    // Pass categories excluding "All"
-                    categories={categories.slice(1)}
-                />
+                <ModalBox handleCancel={handleCancelEdit}>
+                  <EditItemForm
+                      item={inventory.find(item => item.id === editItemId)}
+                      onUpdateItem={handleEditItem}
+                      onCancel={handleCancelEdit}
+                      // Pass categories excluding "All"
+                      categories={categories.slice(1)}
+                  />
+                </ModalBox>
             )}
         </div>
     );

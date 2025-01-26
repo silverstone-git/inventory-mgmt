@@ -21,25 +21,25 @@ function AddItemForm({ onAddItem, onCancel, categories }: AddItemFormProps) {
 
     return (
         <div className="add-item-form">
-            <h3>Add New Item</h3>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <div className='text-2xl font-bold'>Add New Item</div>
+            <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-4">
+                <div className='mt-4 flex items-center justify-between'>
                     <label htmlFor="name">Name:</label>
-                    <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                    <input className='border border-blue-200 rounded py-2 px-3 ml-4' type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
                 </div>
-                <div>
+                <div className='mt-4 flex items-center justify-between'>
                     <label htmlFor="category">Category:</label>
-                    <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} required>
+                    <select className='border border-blue-200 rounded py-2 px-3 ml-4' id="category" value={category} onChange={(e) => setCategory(e.target.value)} required>
                         {categories.map((cat: string) => (
                             <option key={cat} value={cat}>{cat}</option>
                         ))}
                     </select>
                 </div>
-                <div>
+                <div className='mt-4 flex items-center justify-between'>
                     <label htmlFor="quantity">Quantity:</label>
-                    <input type="number" id="quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} required min={0} />
+                    <input className='border border-blue-200 rounded py-2 px-3 ml-4' type="number" id="quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} required min={0} />
                 </div>
-                <div className="form-actions">
+                <div className="flex gap-4">
                     <button type="submit">Add Item</button>
                     <button type="button" onClick={onCancel}>Cancel</button>
                 </div>
