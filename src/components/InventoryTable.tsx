@@ -29,14 +29,27 @@ function InventoryTable({ inventory, onDelete, onEdit, sortByQuantity, currentSo
                       TODO: bottom cells not rounded
                     */}
                     {inventory.map((item: Item, ind: number) => (
-                        <tr key={item.id} className={(ind % 2 == 1 ? " bg-blue-200 " : "") + (ind == inventory.length - 1 ? " rounded-bl-xl rounded-br-xl " : "") + (item.quantity < 10 ? 'low-stock' : '')}>
+                        <tr key={item.id} className={
+                            (ind % 2 == 1 ? " bg-blue-200 " : "") + 
+                            (ind == inventory.length - 1 ? " rounded-bl-xl rounded-br-xl " : "") +
+                            (item.quantity < 10 ? 'low-stock' : '')}>
                
                             <td className={(ind == inventory.length - 1 ? "rounded-bl-xl" : " ")}>{item.name}</td>
                             <td>{item.category}</td>
                             <td>{item.quantity}</td>
-                            <td className={"" + (ind == inventory.length - 1 ? "rounded-br-xl" : "")}>
-                                <div className="mr-4 inline cursor-pointer text-blue-500 hover:text-blue-700 hover:underline transition-colors" onClick={() => onEdit(item.id)}>Edit</div>
-                                <div className="inline cursor-pointer text-blue-500 hover:text-blue-700 hover:underline transition-colors" onClick={() => onDelete(item.id)}>Delete</div>
+                            <td className={"" + 
+                              (ind == inventory.length - 1 ? "rounded-br-xl" : "")
+                            }>
+                                <div className="mr-4 inline cursor-pointer text-blue-500 hover:text-blue-700 hover:underline transition-colors"
+                                  onClick={() => onEdit(item.id)}>
+                                  Edit
+                                </div>
+
+                                <div className="inline cursor-pointer text-blue-500 hover:text-blue-700 hover:underline transition-colors" 
+                                  onClick={() => onDelete(item.id)}>
+                                  Delete
+                                </div>
+
                             </td>
                         </tr>
                     ))}

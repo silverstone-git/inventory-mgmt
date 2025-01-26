@@ -24,3 +24,7 @@
 .filter-button {
   @apply rounded-full h-8 w-8 p-0 ml-2 text-black;
 }
+
+.low-stock {
+  @apply text-red-800;
+}
